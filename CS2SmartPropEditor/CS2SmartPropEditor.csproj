@@ -6,6 +6,18 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>CS2SmartPropEditor.Program</StartupObject>
+    <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+    <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartProject\SmartProject.csproj" />
+    <ProjectReference Include="..\VSmart\VSmart.csproj" />
+  </ItemGroup>
 
 </Project>
