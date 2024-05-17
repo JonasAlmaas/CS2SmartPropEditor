@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyValue3", "KeyValue3\KeyV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS2SmartPropEditor.VSmart", "CS2SmartPropEditor.VSmart\CS2SmartPropEditor.VSmart.csproj", "{A856C117-A9BD-4521-B988-C279BDD0BA31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS2SmartPropEditor.SmartProject", "CS2SmartPropEditor.SmartProject\CS2SmartPropEditor.SmartProject.csproj", "{7B97C70C-303F-48EB-9DE1-58C82A9828E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS2SmartPropEditor.Project", "CS2SmartPropEditor.Project\CS2SmartPropEditor.Project.csproj", "{7B97C70C-303F-48EB-9DE1-58C82A9828E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

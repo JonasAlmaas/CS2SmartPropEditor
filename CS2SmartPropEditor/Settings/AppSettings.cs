@@ -8,6 +8,11 @@ internal class AppSettings
 		this.SteamAppPath = RegestryManager.GetSteamAppPath();
 	}
 
+	public void SetSteamAppPath(string path) {
+		RegestryManager.SetSteamAppPath(path);
+		this.SteamAppPath = path;
+	}
+
 	#region Static Interface
 
 	private static AppSettings? instance = null;

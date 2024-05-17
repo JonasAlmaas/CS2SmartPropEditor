@@ -16,7 +16,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
 
   <ItemGroup>
-    <ProjectReference Include="..\CS2SmartPropEditor.SmartProject\CS2SmartPropEditor.SmartProject.csproj" />
+    <ProjectReference Include="..\CS2SmartPropEditor.Project\CS2SmartPropEditor.Project.csproj" />
     <ProjectReference Include="..\CS2SmartPropEditor.VSmart\CS2SmartPropEditor.VSmart.csproj" />
   </ItemGroup>
 

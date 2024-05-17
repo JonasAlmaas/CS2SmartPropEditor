@@ -28,7 +28,7 @@ partial class MainForm
 		this.menuStrip1 = new MenuStrip();
 		this.fileToolStripMenuItem = new ToolStripMenuItem();
 		this.newToolStripMenuItem = new ToolStripMenuItem();
-		this.projectToolStripMenuItem = new ToolStripMenuItem();
+		this.createProjectToolStripMenuItem = new ToolStripMenuItem();
 		this.smartPropToolStripMenuItem = new ToolStripMenuItem();
 		this.openToolStripMenuItem = new ToolStripMenuItem();
 		this.reloadFromDiskToolStripMenuItem = new ToolStripMenuItem();
@@ -50,13 +50,18 @@ partial class MainForm
 		this.deleteSelectedToolStripMenuItem = new ToolStripMenuItem();
 		this.toolsToolStripMenuItem = new ToolStripMenuItem();
 		this.settingsToolStripMenuItem1 = new ToolStripMenuItem();
+		this.helpToolStripMenuItem = new ToolStripMenuItem();
+		this.smartPropVDCToolStripMenuItem = new ToolStripMenuItem();
 		this.openSmartProjectFileDialog = new OpenFileDialog();
+		this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+		this.fileSystemWatcher1 = new FileSystemWatcher();
 		this.menuStrip1.SuspendLayout();
+		((System.ComponentModel.ISupportInitialize)this.fileSystemWatcher1).BeginInit();
 		this.SuspendLayout();
 		// 
 		// menuStrip1
 		// 
-		this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.fileToolStripMenuItem, this.editToolStripMenuItem, this.toolsToolStripMenuItem });
+		this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.fileToolStripMenuItem, this.editToolStripMenuItem, this.toolsToolStripMenuItem, this.helpToolStripMenuItem });
 		this.menuStrip1.Location = new Point(0, 0);
 		this.menuStrip1.Name = "menuStrip1";
 		this.menuStrip1.Size = new Size(896, 24);
@@ -72,20 +77,22 @@ partial class MainForm
 		// 
 		// newToolStripMenuItem
 		// 
-		this.newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.projectToolStripMenuItem, this.smartPropToolStripMenuItem });
+		this.newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.createProjectToolStripMenuItem, this.smartPropToolStripMenuItem });
 		this.newToolStripMenuItem.Name = "newToolStripMenuItem";
 		this.newToolStripMenuItem.Size = new Size(195, 22);
 		this.newToolStripMenuItem.Text = "New";
 		// 
-		// projectToolStripMenuItem
+		// createProjectToolStripMenuItem
 		// 
-		this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-		this.projectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.N;
-		this.projectToolStripMenuItem.Size = new Size(195, 22);
-		this.projectToolStripMenuItem.Text = "Project...";
+		this.createProjectToolStripMenuItem.Name = "createProjectToolStripMenuItem";
+		this.createProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.N;
+		this.createProjectToolStripMenuItem.Size = new Size(195, 22);
+		this.createProjectToolStripMenuItem.Text = "Project...";
+		this.createProjectToolStripMenuItem.Click += this.createProjectToolStripMenuItem_Click;
 		// 
 		// smartPropToolStripMenuItem
 		// 
+		this.smartPropToolStripMenuItem.Enabled = false;
 		this.smartPropToolStripMenuItem.Name = "smartPropToolStripMenuItem";
 		this.smartPropToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.N;
 		this.smartPropToolStripMenuItem.Size = new Size(195, 22);
@@ -101,12 +108,14 @@ partial class MainForm
 		// 
 		// reloadFromDiskToolStripMenuItem
 		// 
+		this.reloadFromDiskToolStripMenuItem.Enabled = false;
 		this.reloadFromDiskToolStripMenuItem.Name = "reloadFromDiskToolStripMenuItem";
 		this.reloadFromDiskToolStripMenuItem.Size = new Size(195, 22);
 		this.reloadFromDiskToolStripMenuItem.Text = "Reload From Disk";
 		// 
 		// recentFilesToolStripMenuItem
 		// 
+		this.recentFilesToolStripMenuItem.Enabled = false;
 		this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
 		this.recentFilesToolStripMenuItem.Size = new Size(195, 22);
 		this.recentFilesToolStripMenuItem.Text = "Recent Files";
@@ -122,9 +131,11 @@ partial class MainForm
 		this.saveToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
 		this.saveToolStripMenuItem.Size = new Size(195, 22);
 		this.saveToolStripMenuItem.Text = "Save";
+		this.saveToolStripMenuItem.Click += this.saveToolStripMenuItem_Click;
 		// 
 		// saveAsToolStripMenuItem
 		// 
+		this.saveAsToolStripMenuItem.Enabled = false;
 		this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
 		this.saveAsToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.S;
 		this.saveAsToolStripMenuItem.Size = new Size(195, 22);
@@ -152,12 +163,14 @@ partial class MainForm
 		// 
 		// undoToolStripMenuItem
 		// 
+		this.undoToolStripMenuItem.Enabled = false;
 		this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
 		this.undoToolStripMenuItem.Size = new Size(154, 22);
 		this.undoToolStripMenuItem.Text = "Undo";
 		// 
 		// redoToolStripMenuItem
 		// 
+		this.redoToolStripMenuItem.Enabled = false;
 		this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
 		this.redoToolStripMenuItem.Size = new Size(154, 22);
 		this.redoToolStripMenuItem.Text = "Redo";
@@ -169,24 +182,28 @@ partial class MainForm
 		// 
 		// cutToolStripMenuItem
 		// 
+		this.cutToolStripMenuItem.Enabled = false;
 		this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
 		this.cutToolStripMenuItem.Size = new Size(154, 22);
 		this.cutToolStripMenuItem.Text = "Cut";
 		// 
 		// copyToolStripMenuItem
 		// 
+		this.copyToolStripMenuItem.Enabled = false;
 		this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
 		this.copyToolStripMenuItem.Size = new Size(154, 22);
 		this.copyToolStripMenuItem.Text = "Copy";
 		// 
 		// pasteToolStripMenuItem
 		// 
+		this.pasteToolStripMenuItem.Enabled = false;
 		this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
 		this.pasteToolStripMenuItem.Size = new Size(154, 22);
 		this.pasteToolStripMenuItem.Text = "Paste";
 		// 
 		// duplicateToolStripMenuItem
 		// 
+		this.duplicateToolStripMenuItem.Enabled = false;
 		this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
 		this.duplicateToolStripMenuItem.Size = new Size(154, 22);
 		this.duplicateToolStripMenuItem.Text = "Duplicate";
@@ -198,6 +215,7 @@ partial class MainForm
 		// 
 		// deleteSelectedToolStripMenuItem
 		// 
+		this.deleteSelectedToolStripMenuItem.Enabled = false;
 		this.deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
 		this.deleteSelectedToolStripMenuItem.Size = new Size(154, 22);
 		this.deleteSelectedToolStripMenuItem.Text = "Delete Selected";
@@ -214,15 +232,35 @@ partial class MainForm
 		this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
 		this.settingsToolStripMenuItem1.Size = new Size(116, 22);
 		this.settingsToolStripMenuItem1.Text = "Settings";
+		this.settingsToolStripMenuItem1.Click += this.settingsToolStripMenuItem1_Click;
+		// 
+		// helpToolStripMenuItem
+		// 
+		this.helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.smartPropVDCToolStripMenuItem });
+		this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+		this.helpToolStripMenuItem.Size = new Size(44, 20);
+		this.helpToolStripMenuItem.Text = "Help";
+		// 
+		// smartPropVDCToolStripMenuItem
+		// 
+		this.smartPropVDCToolStripMenuItem.Name = "smartPropVDCToolStripMenuItem";
+		this.smartPropVDCToolStripMenuItem.Size = new Size(159, 22);
+		this.smartPropVDCToolStripMenuItem.Text = "Smart Prop VDC";
+		this.smartPropVDCToolStripMenuItem.Click += this.smartPropVDCToolStripMenuItem_Click;
 		// 
 		// openSmartProjectFileDialog
 		// 
 		this.openSmartProjectFileDialog.DefaultExt = "smartproj";
-		this.openSmartProjectFileDialog.FileName = "openFileDialog1";
 		this.openSmartProjectFileDialog.Filter = "Smart project files|*.smartproj|All files|*.*";
+		// 
+		// fileSystemWatcher1
+		// 
+		this.fileSystemWatcher1.EnableRaisingEvents = true;
+		this.fileSystemWatcher1.SynchronizingObject = this;
 		// 
 		// MainForm
 		// 
+		this.AllowDrop = true;
 		this.AutoScaleDimensions = new SizeF(7F, 15F);
 		this.AutoScaleMode = AutoScaleMode.Font;
 		this.BackColor = SystemColors.Control;
@@ -232,8 +270,11 @@ partial class MainForm
 		this.Margin = new Padding(2);
 		this.Name = "MainForm";
 		this.Text = "CS2 Smart-Prop Editor";
+		this.DragDrop += this.MainForm_DragDrop;
+		this.DragEnter += this.MainForm_DragEnter;
 		this.menuStrip1.ResumeLayout(false);
 		this.menuStrip1.PerformLayout();
+		((System.ComponentModel.ISupportInitialize)this.fileSystemWatcher1).EndInit();
 		this.ResumeLayout(false);
 		this.PerformLayout();
 	}
@@ -247,7 +288,7 @@ partial class MainForm
 	private ToolStripMenuItem toolsToolStripMenuItem;
 	private ToolStripMenuItem newToolStripMenuItem;
 	private ToolStripMenuItem saveAsToolStripMenuItem;
-	private ToolStripMenuItem projectToolStripMenuItem;
+	private ToolStripMenuItem createProjectToolStripMenuItem;
 	private ToolStripMenuItem smartPropToolStripMenuItem;
 	private ToolStripMenuItem exitToolStripMenuItem;
 	private ToolStripSeparator toolStripSeparator1;
@@ -266,4 +307,8 @@ partial class MainForm
 	private ToolStripMenuItem recentFilesToolStripMenuItem;
 	private ToolStripMenuItem settingsToolStripMenuItem1;
 	private OpenFileDialog openSmartProjectFileDialog;
+	private ToolStripMenuItem helpToolStripMenuItem;
+	private ToolStripMenuItem smartPropVDCToolStripMenuItem;
+	private System.ComponentModel.BackgroundWorker backgroundWorker1;
+	private FileSystemWatcher fileSystemWatcher1;
 }

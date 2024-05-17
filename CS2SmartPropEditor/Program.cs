@@ -1,4 +1,4 @@
-#if DEBUG
+#if DEBUG && false
 using System.Runtime.InteropServices;
 #endif
 
@@ -9,11 +9,10 @@ internal static class Program
 	[STAThread]
 	static void Main(string[] args)
 	{
-#if DEBUG
+#if DEBUG && false
 		AllocConsole();
-#endif
-
 		Console.WriteLine("Starting CS2 Smart-Prop Editor...");
+#endif
 
 		// To customize application configuration such as set high DPI settings or default font,
 		// see https://aka.ms/applicationconfiguration.
@@ -21,7 +20,7 @@ internal static class Program
 		Application.Run(new MainForm());
 	}
 
-#if DEBUG
+#if DEBUG && false
 	[DllImport("kernel32.dll", SetLastError = true)]
 	[return: MarshalAs(UnmanagedType.Bool)]
 	static extern bool AllocConsole();
