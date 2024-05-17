@@ -1,8 +1,12 @@
-﻿namespace SmartProject;
+﻿namespace CS2SmartPropEditor.SmartProject;
 
 public class SmartProject
 {
-	public static readonly string extension = ".vsmartproj";
+	public static readonly string Extension = ".smartproj";
+
+	public static readonly int Version = 1;
+
+	public required string Name;
 }
 
 public class SmartProjectSerilizer

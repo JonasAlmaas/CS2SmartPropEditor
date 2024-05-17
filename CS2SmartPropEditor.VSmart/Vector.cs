@@ -1,4 +1,4 @@
-﻿namespace VSmart;
+﻿namespace CS2SmartPropEditor.VSmart;
 
 public class Vector2
 {

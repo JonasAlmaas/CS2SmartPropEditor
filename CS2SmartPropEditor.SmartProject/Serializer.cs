@@ -1,4 +1,4 @@
-﻿namespace SmartProject;
+﻿namespace CS2SmartPropEditor.SmartProject;
 
 public class Serializer
 {

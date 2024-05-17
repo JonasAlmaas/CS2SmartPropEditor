@@ -1,6 +1,6 @@
 ﻿//https://developer.valvesoftware.com/wiki/Smartprop_Variables
 
-namespace VSmart;
+namespace CS2SmartPropEditor.VSmart;
 
 internal abstract class VSmartVariable : VSmartNode
 {

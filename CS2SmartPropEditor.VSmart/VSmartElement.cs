@@ -2,7 +2,7 @@
 
 using KeyValue3;
 
-namespace VSmart;
+namespace CS2SmartPropEditor.VSmart;
 
 public abstract class Element : VSmartNode
 {
