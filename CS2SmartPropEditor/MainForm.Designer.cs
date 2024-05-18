@@ -25,6 +25,8 @@ partial class MainForm
 	///  the contents of this method with the code editor.
 	/// </summary>
 	private void InitializeComponent() {
+		TreeNode treeNode1 = new TreeNode("Brick Debris 01 Wall");
+		TreeNode treeNode2 = new TreeNode("brick_debris_01");
 		this.menuStrip1 = new MenuStrip();
 		this.fileToolStripMenuItem = new ToolStripMenuItem();
 		this.newToolStripMenuItem = new ToolStripMenuItem();
@@ -52,16 +54,28 @@ partial class MainForm
 		this.settingsToolStripMenuItem1 = new ToolStripMenuItem();
 		this.helpToolStripMenuItem = new ToolStripMenuItem();
 		this.smartPropVDCToolStripMenuItem = new ToolStripMenuItem();
+		this.toolStripTextBoxVersion = new ToolStripTextBox();
 		this.openSmartProjectFileDialog = new OpenFileDialog();
-		this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-		this.fileSystemWatcher1 = new FileSystemWatcher();
+		this.splitContainer1 = new SplitContainer();
+		this.treeView1 = new TreeView();
+		this.splitContainer2 = new SplitContainer();
+		this.listView1 = new ListView();
+		this.listView2 = new ListView();
 		this.menuStrip1.SuspendLayout();
-		((System.ComponentModel.ISupportInitialize)this.fileSystemWatcher1).BeginInit();
+		((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
+		this.splitContainer1.Panel1.SuspendLayout();
+		this.splitContainer1.Panel2.SuspendLayout();
+		this.splitContainer1.SuspendLayout();
+		((System.ComponentModel.ISupportInitialize)this.splitContainer2).BeginInit();
+		this.splitContainer2.Panel1.SuspendLayout();
+		this.splitContainer2.Panel2.SuspendLayout();
+		this.splitContainer2.SuspendLayout();
 		this.SuspendLayout();
 		// 
 		// menuStrip1
 		// 
-		this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.fileToolStripMenuItem, this.editToolStripMenuItem, this.toolsToolStripMenuItem, this.helpToolStripMenuItem });
+		this.menuStrip1.BackColor = SystemColors.Control;
+		this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.fileToolStripMenuItem, this.editToolStripMenuItem, this.toolsToolStripMenuItem, this.helpToolStripMenuItem, this.toolStripTextBoxVersion });
 		this.menuStrip1.Location = new Point(0, 0);
 		this.menuStrip1.Name = "menuStrip1";
 		this.menuStrip1.Size = new Size(896, 24);
@@ -243,20 +257,96 @@ partial class MainForm
 		// 
 		// smartPropVDCToolStripMenuItem
 		// 
+		this.smartPropVDCToolStripMenuItem.Image = Properties.Resources.s2_logo_182;
 		this.smartPropVDCToolStripMenuItem.Name = "smartPropVDCToolStripMenuItem";
 		this.smartPropVDCToolStripMenuItem.Size = new Size(159, 22);
 		this.smartPropVDCToolStripMenuItem.Text = "Smart Prop VDC";
 		this.smartPropVDCToolStripMenuItem.Click += this.smartPropVDCToolStripMenuItem_Click;
+		// 
+		// toolStripTextBoxVersion
+		// 
+		this.toolStripTextBoxVersion.Alignment = ToolStripItemAlignment.Right;
+		this.toolStripTextBoxVersion.BackColor = SystemColors.Control;
+		this.toolStripTextBoxVersion.BorderStyle = BorderStyle.None;
+		this.toolStripTextBoxVersion.CausesValidation = false;
+		this.toolStripTextBoxVersion.Margin = new Padding(1, 0, 3, 0);
+		this.toolStripTextBoxVersion.Name = "toolStripTextBoxVersion";
+		this.toolStripTextBoxVersion.Overflow = ToolStripItemOverflow.Never;
+		this.toolStripTextBoxVersion.ReadOnly = true;
+		this.toolStripTextBoxVersion.ShortcutsEnabled = false;
+		this.toolStripTextBoxVersion.Size = new Size(50, 20);
+		this.toolStripTextBoxVersion.Text = "10.00.00";
+		this.toolStripTextBoxVersion.TextBoxTextAlign = HorizontalAlignment.Right;
 		// 
 		// openSmartProjectFileDialog
 		// 
 		this.openSmartProjectFileDialog.DefaultExt = "smartproj";
 		this.openSmartProjectFileDialog.Filter = "Smart project files|*.smartproj|All files|*.*";
 		// 
-		// fileSystemWatcher1
+		// splitContainer1
 		// 
-		this.fileSystemWatcher1.EnableRaisingEvents = true;
-		this.fileSystemWatcher1.SynchronizingObject = this;
+		this.splitContainer1.Dock = DockStyle.Fill;
+		this.splitContainer1.Location = new Point(0, 24);
+		this.splitContainer1.Name = "splitContainer1";
+		// 
+		// splitContainer1.Panel1
+		// 
+		this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+		// 
+		// splitContainer1.Panel2
+		// 
+		this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+		this.splitContainer1.Size = new Size(896, 456);
+		this.splitContainer1.SplitterDistance = 239;
+		this.splitContainer1.TabIndex = 3;
+		// 
+		// treeView1
+		// 
+		this.treeView1.Dock = DockStyle.Fill;
+		this.treeView1.Location = new Point(0, 0);
+		this.treeView1.Name = "treeView1";
+		treeNode1.Name = "Node0";
+		treeNode1.Text = "Brick Debris 01 Wall";
+		treeNode2.Name = "Node1";
+		treeNode2.Text = "brick_debris_01";
+		this.treeView1.Nodes.AddRange(new TreeNode[] { treeNode1, treeNode2 });
+		this.treeView1.Size = new Size(239, 456);
+		this.treeView1.TabIndex = 0;
+		// 
+		// splitContainer2
+		// 
+		this.splitContainer2.Dock = DockStyle.Fill;
+		this.splitContainer2.Location = new Point(0, 0);
+		this.splitContainer2.Name = "splitContainer2";
+		// 
+		// splitContainer2.Panel1
+		// 
+		this.splitContainer2.Panel1.Controls.Add(this.listView2);
+		// 
+		// splitContainer2.Panel2
+		// 
+		this.splitContainer2.Panel2.Controls.Add(this.listView1);
+		this.splitContainer2.Size = new Size(653, 456);
+		this.splitContainer2.SplitterDistance = 411;
+		this.splitContainer2.TabIndex = 0;
+		// 
+		// listView1
+		// 
+		this.listView1.Dock = DockStyle.Fill;
+		this.listView1.Location = new Point(0, 0);
+		this.listView1.Name = "listView1";
+		this.listView1.Size = new Size(238, 456);
+		this.listView1.TabIndex = 0;
+		this.listView1.UseCompatibleStateImageBehavior = false;
+		// 
+		// listView2
+		// 
+		this.listView2.Dock = DockStyle.Fill;
+		this.listView2.Location = new Point(0, 0);
+		this.listView2.Name = "listView2";
+		this.listView2.Size = new Size(411, 456);
+		this.listView2.TabIndex = 0;
+		this.listView2.UseCompatibleStateImageBehavior = false;
 		// 
 		// MainForm
 		// 
@@ -265,6 +355,7 @@ partial class MainForm
 		this.AutoScaleMode = AutoScaleMode.Font;
 		this.BackColor = SystemColors.Control;
 		this.ClientSize = new Size(896, 480);
+		this.Controls.Add(this.splitContainer1);
 		this.Controls.Add(this.menuStrip1);
 		this.MainMenuStrip = this.menuStrip1;
 		this.Margin = new Padding(2);
@@ -274,7 +365,14 @@ partial class MainForm
 		this.DragEnter += this.MainForm_DragEnter;
 		this.menuStrip1.ResumeLayout(false);
 		this.menuStrip1.PerformLayout();
-		((System.ComponentModel.ISupportInitialize)this.fileSystemWatcher1).EndInit();
+		this.splitContainer1.Panel1.ResumeLayout(false);
+		this.splitContainer1.Panel2.ResumeLayout(false);
+		((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
+		this.splitContainer1.ResumeLayout(false);
+		this.splitContainer2.Panel1.ResumeLayout(false);
+		this.splitContainer2.Panel2.ResumeLayout(false);
+		((System.ComponentModel.ISupportInitialize)this.splitContainer2).EndInit();
+		this.splitContainer2.ResumeLayout(false);
 		this.ResumeLayout(false);
 		this.PerformLayout();
 	}
@@ -309,6 +407,11 @@ partial class MainForm
 	private OpenFileDialog openSmartProjectFileDialog;
 	private ToolStripMenuItem helpToolStripMenuItem;
 	private ToolStripMenuItem smartPropVDCToolStripMenuItem;
-	private System.ComponentModel.BackgroundWorker backgroundWorker1;
-	private FileSystemWatcher fileSystemWatcher1;
+	private SplitContainer splitContainer1;
+	private ToolStripMenuItem versionToolStripMenuItem;
+	private ToolStripTextBox toolStripTextBoxVersion;
+	private TreeView treeView1;
+	private SplitContainer splitContainer2;
+	private ListView listView1;
+	private ListView listView2;
 }

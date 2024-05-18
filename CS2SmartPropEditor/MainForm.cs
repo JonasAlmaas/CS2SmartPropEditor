@@ -11,15 +11,28 @@ public partial class MainForm : Form
 		InitializeComponent();
 
 		this.updateSaveButtonEnabled();
+		this.toolStripTextBoxVersion.Text = $"v{Program.GetVersion()}";
 	}
 
-	#region Update state function
+	#region Support function
 
 	private void updateSaveButtonEnabled() {
 		this.saveToolStripMenuItem.Enabled = !string.IsNullOrEmpty(ProjectSettings.Get().ProjectPath);
 	}
 
-	#endregion // Update state function
+	private void openProject(string fPath) {
+		var ps = ProjectSettings.Get();
+
+		if (!ps.SetProjectPath(fPath)) {
+			MessageBox.Show("Failed to load project data");
+			return;
+		}
+
+		this.Text = $"CS2 Smart Prop Editor - {ps.Project!.ProjectName}";
+		this.updateSaveButtonEnabled();
+	}
+
+	#endregion // Support function
 
 	private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
 		Application.Exit();
@@ -29,8 +42,7 @@ public partial class MainForm : Form
 		this.openSmartProjectFileDialog.ShowDialog();
 		var fPath = this.openSmartProjectFileDialog.FileName;
 		if (!string.IsNullOrEmpty(fPath)) {
-			ProjectSettings.Get().SetProjectPath(fPath);
-			this.updateSaveButtonEnabled();
+			this.openProject(fPath);
 		}
 	}
 
@@ -53,9 +65,9 @@ public partial class MainForm : Form
 			var fPath = files[0];
 			if (!string.IsNullOrEmpty(fPath)) {
 				if (File.Exists(fPath)) {
-					ProjectSettings.Get().SetProjectPath(fPath);
-					this.updateSaveButtonEnabled();
-				} else {
+					this.openProject(fPath);
+				}
+				else {
 					MessageBox.Show($"File not found: {fPath}");
 				}
 			}
@@ -97,7 +109,8 @@ public partial class MainForm : Form
 		if (string.IsNullOrEmpty(ps.ProjectPath)) {
 			// TODO: Promt the user to select a path
 			MessageBox.Show("Can not save without a project path");
-		} else {
+		}
+		else {
 			File.WriteAllText(ps.ProjectPath, data);
 		}
 	}

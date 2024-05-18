@@ -20,6 +20,8 @@ internal static class Program
 		Application.Run(new MainForm());
 	}
 
+	public static string GetVersion() => "1.0.0";
+
 #if DEBUG && false
 	[DllImport("kernel32.dll", SetLastError = true)]
 	[return: MarshalAs(UnmanagedType.Bool)]

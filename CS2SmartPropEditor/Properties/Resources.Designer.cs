@@ -59,5 +59,15 @@ namespace CS2SmartPropEditor.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap s2_logo_182 {
+            get {
+                object obj = ResourceManager.GetObject("s2_logo_182", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
