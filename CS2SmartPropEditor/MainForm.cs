@@ -7,35 +7,86 @@ namespace CS2SmartPropEditor;
 
 public partial class MainForm : Form
 {
+	private ProjectSmartProp? selectedSmartProp;
+
 	public MainForm() {
 		InitializeComponent();
 
-		this.updateSaveButtonEnabled();
+		this.updateTitle();
 		this.toolStripTextBoxVersion.Text = $"v{Program.GetVersion()}";
+		this.setupSmartPropList();
+		this.updateMenuFileButtonEnabled();
 	}
+
+	#region Setup
+
+	private void setupSmartPropList() {
+		this.smartPropList.View = View.Details;
+		this.smartPropList.LabelEdit = false;
+		this.smartPropList.AllowColumnReorder = false;
+		this.smartPropList.CheckBoxes = false;
+		this.smartPropList.FullRowSelect = true;
+		this.smartPropList.GridLines = false;
+		this.smartPropList.Sorting = SortOrder.Ascending;
+		this.smartPropList.MultiSelect = false;
+
+		this.smartPropList.Columns.Add("Smart Prop", -2, HorizontalAlignment.Left);
+	}
+
+	#endregion // Setup
 
 	#region Support function
 
-	private void updateSaveButtonEnabled() {
-		this.saveToolStripMenuItem.Enabled = !string.IsNullOrEmpty(ProjectSettings.Get().ProjectPath);
+	private void updateTitle() {
+		var ps = ProjectSettings.Get();
+		this.Text = "CS2 Smart Prop Editor" + (ps.Project!=null ? $" - {ps.Project.ProjectName}" : "");
 	}
 
-	private void openProject(string fPath) {
+	private void updateMenuFileButtonEnabled() {
+		this.closeToolStripMenuItem.Enabled = ProjectSettings.Get().Project!=null;
+		this.saveToolStripMenuItem.Enabled = ProjectSettings.Get().Project!=null;
+	}
+
+	private void openProject(string? fPath) {
 		var ps = ProjectSettings.Get();
 
-		if (!ps.SetProjectPath(fPath)) {
-			MessageBox.Show("Failed to load project data");
+		if (!ps.SetProject(fPath)) {
+			MessageBox.Show($"Failed to load project from \"{fPath}\"");
 			return;
 		}
 
-		this.Text = $"CS2 Smart Prop Editor - {ps.Project!.ProjectName}";
-		this.updateSaveButtonEnabled();
+		this.updateTitle();
+		this.updateMenuFileButtonEnabled();
+		this.redrawSmartPropList();
+		this.selectedSmartProp = null;
+		this.updateSmartPropAttributes();
+	}
+
+	private void redrawSmartPropList() {
+		this.smartPropList.Items.Clear();
+
+		var ps = ProjectSettings.Get();
+		if (ps.Project==null) return;
+
+		this.smartPropList.Items.AddRange(ps.Project.SmartProps
+			.Select(r => new ListViewItem(r.Description ?? r.Path))
+			.ToArray());
+	}
+
+	private void updateSmartPropAttributes() {
+		this.textBoxSmartPropDescription.Text = this.selectedSmartProp?.Description;
+		this.textBoxSmartPropPath.Text = this.selectedSmartProp?.Path;
 	}
 
 	#endregion // Support function
 
-	private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-		Application.Exit();
+	#region Menu strip
+
+	private void createProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+		// TODO: Check if a project is open with unsaved changes and prompt the user to save
+
+		var createProjectForm = new CreateProjectForm();
+		createProjectForm.Show();
 	}
 
 	private void openToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -44,6 +95,35 @@ public partial class MainForm : Form
 		if (!string.IsNullOrEmpty(fPath)) {
 			this.openProject(fPath);
 		}
+	}
+
+	private void closeToolStripMenuItem_Click(object sender, EventArgs e) {
+		this.openProject(null);
+	}
+
+	private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+		var ps = ProjectSettings.Get();
+
+		if (ps.Project==null) return;
+
+		//ProjectSettings.Get().ProjectPath
+		var data = SmartProjectSerializer.Serialize(ps.Project);
+		if (data==null) {
+			MessageBox.Show("Failed to serialize project data");
+			return;
+		}
+
+		if (string.IsNullOrEmpty(ps.ProjectPath)) {
+			// TODO: Promt the user to select a path
+			MessageBox.Show("Can not save without a project path");
+		}
+		else {
+			File.WriteAllText(ps.ProjectPath, data);
+		}
+	}
+
+	private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+		Application.Exit();
 	}
 
 	private void settingsToolStripMenuItem1_Click(object sender, EventArgs e) {
@@ -55,6 +135,8 @@ public partial class MainForm : Form
 		var url = "https://developer.valvesoftware.com/wiki/Counter-Strike_2_Workshop_Tools/Level_Design/Smartprops";
 		Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
 	}
+
+	#endregion // Menu strip
 
 	private void MainForm_DragDrop(object sender, DragEventArgs e) {
 		if (e.Data==null) return;
@@ -87,31 +169,15 @@ public partial class MainForm : Form
 		}
 	}
 
-	private void createProjectToolStripMenuItem_Click(object sender, EventArgs e) {
-		// TODO: Check if a project is open with unsaved changes and prompt the user to save
+	//private void button1_Click(object sender, EventArgs e) {
+	//	ResourceCompiler.Compile("D:\\SteamLibrary\\steamapps\\common\\Counter-Strike Global Offensive\\content\\csgo_addons\\warden\\smartprops\\brick_debris_01.vsmart");
+	//}
 
-		var createProjectForm = new CreateProjectForm();
-		createProjectForm.Show();
-	}
+	private void smartPropList_SelectedIndexChanged(object sender, EventArgs e) {
+		this.selectedSmartProp = this.smartPropList.SelectedItems.Count == 1
+			? ProjectSettings.Get().Project?.SmartProps.ElementAtOrDefault(this.smartPropList.SelectedItems[0].Index)
+			: null;
 
-	private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
-		var ps = ProjectSettings.Get();
-
-		if (ps.Project==null) return;
-
-		//ProjectSettings.Get().ProjectPath
-		var data = SmartProjectSerializer.Serialize(ps.Project);
-		if (data==null) {
-			MessageBox.Show("Failed to serialize project data");
-			return;
-		}
-
-		if (string.IsNullOrEmpty(ps.ProjectPath)) {
-			// TODO: Promt the user to select a path
-			MessageBox.Show("Can not save without a project path");
-		}
-		else {
-			File.WriteAllText(ps.ProjectPath, data);
-		}
+		this.updateSmartPropAttributes();
 	}
 }

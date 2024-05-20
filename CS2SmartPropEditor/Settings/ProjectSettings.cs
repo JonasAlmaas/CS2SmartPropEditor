@@ -4,22 +4,20 @@ namespace CS2SmartPropEditor.Settings;
 
 internal class ProjectSettings
 {
-	public string? ProjectPath {get; private set;} = null;
+	public string? ProjectPath {get; private set;}=null;
+	public SmartProject? Project {get; private set;}=null;
 
-	public bool SetProjectPath(string fPath) {
-		this.ProjectPath = fPath;
-		this.Project = SmartProjectSerializer.Deserialize(fPath);
+	public bool SetProject(string? fPath) {
+		var project = fPath!=null ? SmartProjectSerializer.Deserialize(fPath) : null;
 
-		if (this.Project == null) {
-			MessageBox.Show($"Failed to load project from \"{fPath}\"");
-			this.ProjectPath = null;
-			return false;
-		} else {
+		if (fPath==null || project!=null) {
+			this.ProjectPath = fPath;
+			this.Project = project;
 			return true;
+		} else {
+			return false;
 		}
 	}
-
-	public SmartProject? Project {get; set;} = null;
 
 	#region Static Interface
 

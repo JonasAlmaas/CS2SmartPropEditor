@@ -25,8 +25,6 @@ partial class MainForm
 	///  the contents of this method with the code editor.
 	/// </summary>
 	private void InitializeComponent() {
-		TreeNode treeNode1 = new TreeNode("Brick Debris 01 Wall");
-		TreeNode treeNode2 = new TreeNode("brick_debris_01");
 		this.menuStrip1 = new MenuStrip();
 		this.fileToolStripMenuItem = new ToolStripMenuItem();
 		this.newToolStripMenuItem = new ToolStripMenuItem();
@@ -57,10 +55,22 @@ partial class MainForm
 		this.toolStripTextBoxVersion = new ToolStripTextBox();
 		this.openSmartProjectFileDialog = new OpenFileDialog();
 		this.splitContainer1 = new SplitContainer();
-		this.treeView1 = new TreeView();
+		this.smartPropList = new ListView();
 		this.splitContainer2 = new SplitContainer();
-		this.listView1 = new ListView();
-		this.listView2 = new ListView();
+		this.tabControl1 = new TabControl();
+		this.tabPageeditor = new TabPage();
+		this.treeView1 = new TreeView();
+		this.tabPageRaw = new TabPage();
+		this.richTextBoxRawFile = new RichTextBox();
+		this.panel1 = new Panel();
+		this.groupBox1 = new GroupBox();
+		this.groupBoxAttributes = new GroupBox();
+		this.tableLayoutPanel1 = new TableLayoutPanel();
+		this.label3 = new Label();
+		this.textBoxSmartPropPath = new TextBox();
+		this.textBoxSmartPropDescription = new TextBox();
+		this.label1 = new Label();
+		this.closeToolStripMenuItem = new ToolStripMenuItem();
 		this.menuStrip1.SuspendLayout();
 		((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
 		this.splitContainer1.Panel1.SuspendLayout();
@@ -70,6 +80,12 @@ partial class MainForm
 		this.splitContainer2.Panel1.SuspendLayout();
 		this.splitContainer2.Panel2.SuspendLayout();
 		this.splitContainer2.SuspendLayout();
+		this.tabControl1.SuspendLayout();
+		this.tabPageeditor.SuspendLayout();
+		this.tabPageRaw.SuspendLayout();
+		this.panel1.SuspendLayout();
+		this.groupBoxAttributes.SuspendLayout();
+		this.tableLayoutPanel1.SuspendLayout();
 		this.SuspendLayout();
 		// 
 		// menuStrip1
@@ -78,13 +94,13 @@ partial class MainForm
 		this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.fileToolStripMenuItem, this.editToolStripMenuItem, this.toolsToolStripMenuItem, this.helpToolStripMenuItem, this.toolStripTextBoxVersion });
 		this.menuStrip1.Location = new Point(0, 0);
 		this.menuStrip1.Name = "menuStrip1";
-		this.menuStrip1.Size = new Size(896, 24);
+		this.menuStrip1.Size = new Size(1064, 24);
 		this.menuStrip1.TabIndex = 1;
 		this.menuStrip1.Text = "menuStrip1";
 		// 
 		// fileToolStripMenuItem
 		// 
-		this.fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.newToolStripMenuItem, this.openToolStripMenuItem, this.reloadFromDiskToolStripMenuItem, this.recentFilesToolStripMenuItem, this.toolStripSeparator2, this.saveToolStripMenuItem, this.saveAsToolStripMenuItem, this.toolStripSeparator1, this.exitToolStripMenuItem });
+		this.fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.newToolStripMenuItem, this.openToolStripMenuItem, this.reloadFromDiskToolStripMenuItem, this.recentFilesToolStripMenuItem, this.closeToolStripMenuItem, this.toolStripSeparator2, this.saveToolStripMenuItem, this.saveAsToolStripMenuItem, this.toolStripSeparator1, this.exitToolStripMenuItem });
 		this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 		this.fileToolStripMenuItem.Size = new Size(37, 20);
 		this.fileToolStripMenuItem.Text = "File";
@@ -179,59 +195,59 @@ partial class MainForm
 		// 
 		this.undoToolStripMenuItem.Enabled = false;
 		this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-		this.undoToolStripMenuItem.Size = new Size(154, 22);
+		this.undoToolStripMenuItem.Size = new Size(180, 22);
 		this.undoToolStripMenuItem.Text = "Undo";
 		// 
 		// redoToolStripMenuItem
 		// 
 		this.redoToolStripMenuItem.Enabled = false;
 		this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-		this.redoToolStripMenuItem.Size = new Size(154, 22);
+		this.redoToolStripMenuItem.Size = new Size(180, 22);
 		this.redoToolStripMenuItem.Text = "Redo";
 		// 
 		// toolStripSeparator3
 		// 
 		this.toolStripSeparator3.Name = "toolStripSeparator3";
-		this.toolStripSeparator3.Size = new Size(151, 6);
+		this.toolStripSeparator3.Size = new Size(177, 6);
 		// 
 		// cutToolStripMenuItem
 		// 
 		this.cutToolStripMenuItem.Enabled = false;
 		this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-		this.cutToolStripMenuItem.Size = new Size(154, 22);
+		this.cutToolStripMenuItem.Size = new Size(180, 22);
 		this.cutToolStripMenuItem.Text = "Cut";
 		// 
 		// copyToolStripMenuItem
 		// 
 		this.copyToolStripMenuItem.Enabled = false;
 		this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-		this.copyToolStripMenuItem.Size = new Size(154, 22);
+		this.copyToolStripMenuItem.Size = new Size(180, 22);
 		this.copyToolStripMenuItem.Text = "Copy";
 		// 
 		// pasteToolStripMenuItem
 		// 
 		this.pasteToolStripMenuItem.Enabled = false;
 		this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-		this.pasteToolStripMenuItem.Size = new Size(154, 22);
+		this.pasteToolStripMenuItem.Size = new Size(180, 22);
 		this.pasteToolStripMenuItem.Text = "Paste";
 		// 
 		// duplicateToolStripMenuItem
 		// 
 		this.duplicateToolStripMenuItem.Enabled = false;
 		this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-		this.duplicateToolStripMenuItem.Size = new Size(154, 22);
+		this.duplicateToolStripMenuItem.Size = new Size(180, 22);
 		this.duplicateToolStripMenuItem.Text = "Duplicate";
 		// 
 		// toolStripSeparator4
 		// 
 		this.toolStripSeparator4.Name = "toolStripSeparator4";
-		this.toolStripSeparator4.Size = new Size(151, 6);
+		this.toolStripSeparator4.Size = new Size(177, 6);
 		// 
 		// deleteSelectedToolStripMenuItem
 		// 
 		this.deleteSelectedToolStripMenuItem.Enabled = false;
 		this.deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
-		this.deleteSelectedToolStripMenuItem.Size = new Size(154, 22);
+		this.deleteSelectedToolStripMenuItem.Size = new Size(180, 22);
 		this.deleteSelectedToolStripMenuItem.Text = "Delete Selected";
 		// 
 		// toolsToolStripMenuItem
@@ -244,7 +260,7 @@ partial class MainForm
 		// settingsToolStripMenuItem1
 		// 
 		this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-		this.settingsToolStripMenuItem1.Size = new Size(116, 22);
+		this.settingsToolStripMenuItem1.Size = new Size(180, 22);
 		this.settingsToolStripMenuItem1.Text = "Settings";
 		this.settingsToolStripMenuItem1.Click += this.settingsToolStripMenuItem1_Click;
 		// 
@@ -259,7 +275,7 @@ partial class MainForm
 		// 
 		this.smartPropVDCToolStripMenuItem.Image = Properties.Resources.s2_logo_182;
 		this.smartPropVDCToolStripMenuItem.Name = "smartPropVDCToolStripMenuItem";
-		this.smartPropVDCToolStripMenuItem.Size = new Size(159, 22);
+		this.smartPropVDCToolStripMenuItem.Size = new Size(180, 22);
 		this.smartPropVDCToolStripMenuItem.Text = "Smart Prop VDC";
 		this.smartPropVDCToolStripMenuItem.Click += this.smartPropVDCToolStripMenuItem_Click;
 		// 
@@ -291,27 +307,24 @@ partial class MainForm
 		// 
 		// splitContainer1.Panel1
 		// 
-		this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+		this.splitContainer1.Panel1.Controls.Add(this.smartPropList);
 		// 
 		// splitContainer1.Panel2
 		// 
 		this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-		this.splitContainer1.Size = new Size(896, 456);
-		this.splitContainer1.SplitterDistance = 239;
+		this.splitContainer1.Size = new Size(1064, 587);
+		this.splitContainer1.SplitterDistance = 283;
 		this.splitContainer1.TabIndex = 3;
 		// 
-		// treeView1
+		// smartPropList
 		// 
-		this.treeView1.Dock = DockStyle.Fill;
-		this.treeView1.Location = new Point(0, 0);
-		this.treeView1.Name = "treeView1";
-		treeNode1.Name = "Node0";
-		treeNode1.Text = "Brick Debris 01 Wall";
-		treeNode2.Name = "Node1";
-		treeNode2.Text = "brick_debris_01";
-		this.treeView1.Nodes.AddRange(new TreeNode[] { treeNode1, treeNode2 });
-		this.treeView1.Size = new Size(239, 456);
-		this.treeView1.TabIndex = 0;
+		this.smartPropList.Dock = DockStyle.Fill;
+		this.smartPropList.Location = new Point(0, 0);
+		this.smartPropList.Name = "smartPropList";
+		this.smartPropList.Size = new Size(283, 587);
+		this.smartPropList.TabIndex = 2;
+		this.smartPropList.UseCompatibleStateImageBehavior = false;
+		this.smartPropList.SelectedIndexChanged += this.smartPropList_SelectedIndexChanged;
 		// 
 		// splitContainer2
 		// 
@@ -321,32 +334,172 @@ partial class MainForm
 		// 
 		// splitContainer2.Panel1
 		// 
-		this.splitContainer2.Panel1.Controls.Add(this.listView2);
+		this.splitContainer2.Panel1.Controls.Add(this.tabControl1);
 		// 
 		// splitContainer2.Panel2
 		// 
-		this.splitContainer2.Panel2.Controls.Add(this.listView1);
-		this.splitContainer2.Size = new Size(653, 456);
-		this.splitContainer2.SplitterDistance = 411;
+		this.splitContainer2.Panel2.Controls.Add(this.panel1);
+		this.splitContainer2.Size = new Size(777, 587);
+		this.splitContainer2.SplitterDistance = 489;
 		this.splitContainer2.TabIndex = 0;
 		// 
-		// listView1
+		// tabControl1
 		// 
-		this.listView1.Dock = DockStyle.Fill;
-		this.listView1.Location = new Point(0, 0);
-		this.listView1.Name = "listView1";
-		this.listView1.Size = new Size(238, 456);
-		this.listView1.TabIndex = 0;
-		this.listView1.UseCompatibleStateImageBehavior = false;
+		this.tabControl1.Controls.Add(this.tabPageeditor);
+		this.tabControl1.Controls.Add(this.tabPageRaw);
+		this.tabControl1.Dock = DockStyle.Fill;
+		this.tabControl1.Location = new Point(0, 0);
+		this.tabControl1.Margin = new Padding(0);
+		this.tabControl1.Name = "tabControl1";
+		this.tabControl1.SelectedIndex = 0;
+		this.tabControl1.Size = new Size(489, 587);
+		this.tabControl1.TabIndex = 2;
 		// 
-		// listView2
+		// tabPageeditor
 		// 
-		this.listView2.Dock = DockStyle.Fill;
-		this.listView2.Location = new Point(0, 0);
-		this.listView2.Name = "listView2";
-		this.listView2.Size = new Size(411, 456);
-		this.listView2.TabIndex = 0;
-		this.listView2.UseCompatibleStateImageBehavior = false;
+		this.tabPageeditor.Controls.Add(this.treeView1);
+		this.tabPageeditor.Location = new Point(4, 24);
+		this.tabPageeditor.Name = "tabPageeditor";
+		this.tabPageeditor.Padding = new Padding(3);
+		this.tabPageeditor.Size = new Size(481, 559);
+		this.tabPageeditor.TabIndex = 0;
+		this.tabPageeditor.Text = "Editor";
+		this.tabPageeditor.UseVisualStyleBackColor = true;
+		// 
+		// treeView1
+		// 
+		this.treeView1.Dock = DockStyle.Fill;
+		this.treeView1.Location = new Point(3, 3);
+		this.treeView1.Name = "treeView1";
+		this.treeView1.Size = new Size(475, 553);
+		this.treeView1.TabIndex = 0;
+		// 
+		// tabPageRaw
+		// 
+		this.tabPageRaw.Controls.Add(this.richTextBoxRawFile);
+		this.tabPageRaw.Location = new Point(4, 24);
+		this.tabPageRaw.Name = "tabPageRaw";
+		this.tabPageRaw.Padding = new Padding(3);
+		this.tabPageRaw.Size = new Size(481, 559);
+		this.tabPageRaw.TabIndex = 1;
+		this.tabPageRaw.Text = "Raw";
+		this.tabPageRaw.UseVisualStyleBackColor = true;
+		// 
+		// richTextBoxRawFile
+		// 
+		this.richTextBoxRawFile.Dock = DockStyle.Fill;
+		this.richTextBoxRawFile.Location = new Point(3, 3);
+		this.richTextBoxRawFile.Name = "richTextBoxRawFile";
+		this.richTextBoxRawFile.ReadOnly = true;
+		this.richTextBoxRawFile.Size = new Size(475, 553);
+		this.richTextBoxRawFile.TabIndex = 0;
+		this.richTextBoxRawFile.Text = "";
+		this.richTextBoxRawFile.WordWrap = false;
+		// 
+		// panel1
+		// 
+		this.panel1.BackColor = SystemColors.Window;
+		this.panel1.BorderStyle = BorderStyle.Fixed3D;
+		this.panel1.Controls.Add(this.groupBox1);
+		this.panel1.Controls.Add(this.groupBoxAttributes);
+		this.panel1.Dock = DockStyle.Fill;
+		this.panel1.ForeColor = SystemColors.WindowText;
+		this.panel1.Location = new Point(0, 0);
+		this.panel1.Name = "panel1";
+		this.panel1.Padding = new Padding(3, 0, 3, 3);
+		this.panel1.Size = new Size(284, 587);
+		this.panel1.TabIndex = 4;
+		// 
+		// groupBox1
+		// 
+		this.groupBox1.Dock = DockStyle.Top;
+		this.groupBox1.Location = new Point(3, 80);
+		this.groupBox1.Name = "groupBox1";
+		this.groupBox1.Size = new Size(274, 100);
+		this.groupBox1.TabIndex = 5;
+		this.groupBox1.TabStop = false;
+		this.groupBox1.Text = "Variables";
+		// 
+		// groupBoxAttributes
+		// 
+		this.groupBoxAttributes.AutoSize = true;
+		this.groupBoxAttributes.Controls.Add(this.tableLayoutPanel1);
+		this.groupBoxAttributes.Dock = DockStyle.Top;
+		this.groupBoxAttributes.Location = new Point(3, 0);
+		this.groupBoxAttributes.Name = "groupBoxAttributes";
+		this.groupBoxAttributes.Size = new Size(274, 80);
+		this.groupBoxAttributes.TabIndex = 4;
+		this.groupBoxAttributes.TabStop = false;
+		this.groupBoxAttributes.Text = "Attributes";
+		// 
+		// tableLayoutPanel1
+		// 
+		this.tableLayoutPanel1.AutoSize = true;
+		this.tableLayoutPanel1.BackColor = SystemColors.Window;
+		this.tableLayoutPanel1.ColumnCount = 2;
+		this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+		this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+		this.tableLayoutPanel1.Controls.Add(this.label3, 0, 5);
+		this.tableLayoutPanel1.Controls.Add(this.textBoxSmartPropPath, 0, 5);
+		this.tableLayoutPanel1.Controls.Add(this.textBoxSmartPropDescription, 1, 0);
+		this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+		this.tableLayoutPanel1.Dock = DockStyle.Fill;
+		this.tableLayoutPanel1.Location = new Point(3, 19);
+		this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+		this.tableLayoutPanel1.RowCount = 6;
+		this.tableLayoutPanel1.RowStyles.Add(new RowStyle());
+		this.tableLayoutPanel1.RowStyles.Add(new RowStyle());
+		this.tableLayoutPanel1.RowStyles.Add(new RowStyle());
+		this.tableLayoutPanel1.RowStyles.Add(new RowStyle());
+		this.tableLayoutPanel1.RowStyles.Add(new RowStyle());
+		this.tableLayoutPanel1.RowStyles.Add(new RowStyle());
+		this.tableLayoutPanel1.Size = new Size(268, 58);
+		this.tableLayoutPanel1.TabIndex = 3;
+		// 
+		// label3
+		// 
+		this.label3.AutoSize = true;
+		this.label3.Dock = DockStyle.Fill;
+		this.label3.Location = new Point(3, 29);
+		this.label3.Name = "label3";
+		this.label3.Size = new Size(67, 29);
+		this.label3.TabIndex = 5;
+		this.label3.Text = "Path";
+		this.label3.TextAlign = ContentAlignment.MiddleLeft;
+		// 
+		// textBoxSmartPropPath
+		// 
+		this.textBoxSmartPropPath.Dock = DockStyle.Fill;
+		this.textBoxSmartPropPath.Location = new Point(76, 32);
+		this.textBoxSmartPropPath.Name = "textBoxSmartPropPath";
+		this.textBoxSmartPropPath.Size = new Size(195, 23);
+		this.textBoxSmartPropPath.TabIndex = 4;
+		// 
+		// textBoxSmartPropDescription
+		// 
+		this.textBoxSmartPropDescription.Dock = DockStyle.Fill;
+		this.textBoxSmartPropDescription.Location = new Point(76, 3);
+		this.textBoxSmartPropDescription.Name = "textBoxSmartPropDescription";
+		this.textBoxSmartPropDescription.Size = new Size(195, 23);
+		this.textBoxSmartPropDescription.TabIndex = 1;
+		// 
+		// label1
+		// 
+		this.label1.AutoSize = true;
+		this.label1.Dock = DockStyle.Fill;
+		this.label1.Location = new Point(3, 0);
+		this.label1.Name = "label1";
+		this.label1.Size = new Size(67, 29);
+		this.label1.TabIndex = 2;
+		this.label1.Text = "Description";
+		this.label1.TextAlign = ContentAlignment.MiddleLeft;
+		// 
+		// closeToolStripMenuItem
+		// 
+		this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+		this.closeToolStripMenuItem.Size = new Size(195, 22);
+		this.closeToolStripMenuItem.Text = "Close";
+		this.closeToolStripMenuItem.Click += this.closeToolStripMenuItem_Click;
 		// 
 		// MainForm
 		// 
@@ -354,7 +507,7 @@ partial class MainForm
 		this.AutoScaleDimensions = new SizeF(7F, 15F);
 		this.AutoScaleMode = AutoScaleMode.Font;
 		this.BackColor = SystemColors.Control;
-		this.ClientSize = new Size(896, 480);
+		this.ClientSize = new Size(1064, 611);
 		this.Controls.Add(this.splitContainer1);
 		this.Controls.Add(this.menuStrip1);
 		this.MainMenuStrip = this.menuStrip1;
@@ -373,6 +526,15 @@ partial class MainForm
 		this.splitContainer2.Panel2.ResumeLayout(false);
 		((System.ComponentModel.ISupportInitialize)this.splitContainer2).EndInit();
 		this.splitContainer2.ResumeLayout(false);
+		this.tabControl1.ResumeLayout(false);
+		this.tabPageeditor.ResumeLayout(false);
+		this.tabPageRaw.ResumeLayout(false);
+		this.panel1.ResumeLayout(false);
+		this.panel1.PerformLayout();
+		this.groupBoxAttributes.ResumeLayout(false);
+		this.groupBoxAttributes.PerformLayout();
+		this.tableLayoutPanel1.ResumeLayout(false);
+		this.tableLayoutPanel1.PerformLayout();
 		this.ResumeLayout(false);
 		this.PerformLayout();
 	}
@@ -410,8 +572,20 @@ partial class MainForm
 	private SplitContainer splitContainer1;
 	private ToolStripMenuItem versionToolStripMenuItem;
 	private ToolStripTextBox toolStripTextBoxVersion;
-	private TreeView treeView1;
 	private SplitContainer splitContainer2;
-	private ListView listView1;
-	private ListView listView2;
+	private ListView smartPropList;
+	private TextBox textBoxSmartPropDescription;
+	private Label label1;
+	private TableLayoutPanel tableLayoutPanel1;
+	private Label label3;
+	private TextBox textBoxSmartPropPath;
+	private Panel panel1;
+	private GroupBox groupBox1;
+	private GroupBox groupBoxAttributes;
+	private TabControl tabControl1;
+	private TabPage tabPageeditor;
+	private TabPage tabPageRaw;
+	private TreeView treeView1;
+	private RichTextBox richTextBoxRawFile;
+	private ToolStripMenuItem closeToolStripMenuItem;
 }
